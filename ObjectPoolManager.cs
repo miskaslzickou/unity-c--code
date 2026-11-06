@@ -1,22 +1,22 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
-// Tøída pro nastavení jednotlivých poolù v Inspectoru
+// Tï¿½ï¿½da pro nastavenï¿½ jednotlivï¿½ch poolï¿½ v Inspectoru
 [System.Serializable]
 public class Pool
 {
     public GameObject prefab;
-    public int size; // Poèet objektù, které se mají pøedvytvoøit do poolu
-    public Transform parent; // Rodièovský transform pro poolované objekty (váš "Pool" GameObject)
+    public int size; // Poï¿½et objektï¿½, kterï¿½ se majï¿½ pï¿½edvytvoï¿½it do poolu
+    public Transform parent; // Rodiï¿½ovskï¿½ transform pro poolovanï¿½ objekty (vï¿½ "Pool" GameObject)
 }
 
 public class ObjectPoolManager : MonoBehaviour
 {
-    public static ObjectPoolManager Instance { get; private set; } // Singleton pattern pro snadný pøístup
+    public static ObjectPoolManager Instance { get; private set; } // Singleton pattern pro snadnï¿½ pï¿½ï¿½stup
 
-    public List<Pool> pools; // Seznam všech poolù, které chceme spravovat
+    public List<Pool> pools; // Seznam vï¿½ech poolï¿½, kterï¿½ chceme spravovat
 
-    // Slovník pro ukládání samotných poolù (klíè: prefab, hodnota: seznam dostupných objektù)
+    // Slovnï¿½k pro uklï¿½dï¿½nï¿½ samotnï¿½ch poolï¿½ (klï¿½ï¿½: prefab, hodnota: seznam dostupnï¿½ch objektï¿½)
     private Dictionary<GameObject, Queue<GameObject>> poolDictionary;
 
     void Awake()
@@ -25,7 +25,7 @@ public class ObjectPoolManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject); // Pokud chcete, aby pool pøežil naèítání scén
+            // DontDestroyOnLoad(gameObject); // Pokud chcete, aby pool pï¿½eï¿½il naï¿½ï¿½tï¿½nï¿½ scï¿½n
         }
         else
         {
@@ -35,40 +35,40 @@ public class ObjectPoolManager : MonoBehaviour
 
         poolDictionary = new Dictionary<GameObject, Queue<GameObject>>();
 
-        // Inicializace všech poolù
+        // Inicializace vï¿½ech poolï¿½
         foreach (Pool pool in pools)
         {
-            // Vytvoøíme Frontu (Queue) pro daný typ prefabu
+            // Vytvoï¿½ï¿½me Frontu (Queue) pro danï¿½ typ prefabu
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            // Pokud není nastavený rodiè, vytvoøíme pro tento pool nový prázdný GameObject
+            // Pokud nenï¿½ nastavenï¿½ rodiï¿½, vytvoï¿½ï¿½me pro tento pool novï¿½ prï¿½zdnï¿½ GameObject
             if (pool.parent == null)
             {
                 GameObject parentGO = new GameObject(pool.prefab.name + "PoolParent");
-                parentGO.transform.SetParent(this.transform); // Rodièem je ObjectPoolManager
+                parentGO.transform.SetParent(this.transform); // Rodiï¿½em je ObjectPoolManager
                 pool.parent = parentGO.transform;
             }
 
             for (int i = 0; i < pool.size; i++)
             {
                 GameObject obj = Instantiate(pool.prefab);
-                obj.transform.SetParent(pool.parent); // Nastavíme rodièe pro poøádek v hierarchii
-                obj.SetActive(false); // Deaktivujeme objekt, protože není zrovna používán
-                objectPool.Enqueue(obj); // Pøidáme objekt do fronty poolu
+                obj.transform.SetParent(pool.parent); // Nastavï¿½me rodiï¿½e pro poï¿½ï¿½dek v hierarchii
+                obj.SetActive(false); // Deaktivujeme objekt, protoï¿½e nenï¿½ zrovna pouï¿½ï¿½vï¿½n
+                objectPool.Enqueue(obj); // Pï¿½idï¿½me objekt do fronty poolu
             }
 
-            // Pøidáme frontu do slovníku, aby k ní bylo možné pøistupovat podle prefabu
+            // Pï¿½idï¿½me frontu do slovnï¿½ku, aby k nï¿½ bylo moï¿½nï¿½ pï¿½istupovat podle prefabu
             poolDictionary.Add(pool.prefab, objectPool);
         }
     }
 
     /// <summary>
-    /// Získá aktivní objekt z poolu.
+    /// Zï¿½skï¿½ aktivnï¿½ objekt z poolu.
     /// </summary>
-    /// <param name="prefab">Prefab, pro který chceme získat objekt.</param>
-    /// <param name="position">Pozice, na kterou se objekt má pøesunout.</param>
-    /// <param name="rotation">Rotace, kterou objekt má mít.</param>
-    /// <returns>Aktivovaný objekt z poolu, nebo null pokud pool neexistuje/je prázdný a nemùže se rozšíøit.</returns>
+    /// <param name="prefab">Prefab, pro kterï¿½ chceme zï¿½skat objekt.</param>
+    /// <param name="position">Pozice, na kterou se objekt mï¿½ pï¿½esunout.</param>
+    /// <param name="rotation">Rotace, kterou objekt mï¿½ mï¿½t.</param>
+    /// <returns>Aktivovanï¿½ objekt z poolu, nebo null pokud pool neexistuje/je prï¿½zdnï¿½ a nemï¿½ï¿½e se rozï¿½ï¿½ï¿½it.</returns>
     public GameObject GetPooledObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(prefab))
@@ -77,19 +77,19 @@ public class ObjectPoolManager : MonoBehaviour
             return null;
         }
 
-        // Pokud je fronta prázdná, mùžete se rozhodnout buï vrátit null,
-        // nebo dynamicky pool rozšíøit (vytvoøit nový objekt).
+        // Pokud je fronta prï¿½zdnï¿½, mï¿½ï¿½ete se rozhodnout buï¿½ vrï¿½tit null,
+        // nebo dynamicky pool rozï¿½ï¿½ï¿½it (vytvoï¿½it novï¿½ objekt).
         if (poolDictionary[prefab].Count == 0)
         {
-            Debug.LogWarning($"Pool pro prefab '{prefab.name}' je prázdný! Rozšiøuji pool...");
-            // Volitelná logika pro rozšíøení poolu:
+            Debug.LogWarning($"Pool pro prefab '{prefab.name}' je prï¿½zdnï¿½! Rozï¿½iï¿½uji pool...");
+            // Volitelnï¿½ logika pro rozï¿½ï¿½ï¿½enï¿½ poolu:
             GameObject newObj = Instantiate(prefab);
-            newObj.transform.SetParent(pools.Find(p => p.prefab == prefab).parent); // Najdeme správného rodièe
-                                                                                    // Návratová hodnota je tento novì vytvoøený objekt
+            newObj.transform.SetParent(pools.Find(p => p.prefab == prefab).parent); // Najdeme sprï¿½vnï¿½ho rodiï¿½e
+                                                                                    // Nï¿½vratovï¿½ hodnota je tento novï¿½ vytvoï¿½enï¿½ objekt
                                                                                     // newObj.SetActive(true); // Aktivujeme ho hned
                                                                                     // return newObj;
-                                                                                    // Nebo: V pøípadì nedostatku prostì nevracet nic:
-            return null; // Záleží na vaší logice
+                                                                                    // Nebo: V pï¿½ï¿½padï¿½ nedostatku prostï¿½ nevracet nic:
+            return null; // Zï¿½leï¿½ï¿½ na vaï¿½ï¿½ logice
         }
 
         GameObject obj = poolDictionary[prefab].Dequeue(); // Vybereme objekt z fronty
@@ -102,20 +102,20 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Vrátí objekt zpìt do poolu.
+    /// Vrï¿½tï¿½ objekt zpï¿½t do poolu.
     /// </summary>
-    /// <param name="obj">Objekt, který se má vrátit.</param>
-    /// <param name="prefabUsedToPool">Prefab, který byl použit k vytvoøení tohoto objektu, aby se vìdìlo, do kterého poolu ho vrátit.</param>
+    /// <param name="obj">Objekt, kterï¿½ se mï¿½ vrï¿½tit.</param>
+    /// <param name="prefabUsedToPool">Prefab, kterï¿½ byl pouï¿½it k vytvoï¿½enï¿½ tohoto objektu, aby se vï¿½dï¿½lo, do kterï¿½ho poolu ho vrï¿½tit.</param>
     public void ReturnObjectToPool(GameObject obj, GameObject prefabUsedToPool)
     {
         if (!poolDictionary.ContainsKey(prefabUsedToPool))
         {
-            Debug.LogWarning($"Pool pro prefab '{prefabUsedToPool.name}' neexistuje! Nièím objekt.");
-            Destroy(obj); // Pokud nevíme, kam vrátit, znièíme
+            Debug.LogWarning($"Pool pro prefab '{prefabUsedToPool.name}' neexistuje! Niï¿½ï¿½m objekt.");
+            Destroy(obj); // Pokud nevï¿½me, kam vrï¿½tit, zniï¿½ï¿½me
             return;
         }
 
         obj.SetActive(false); // Deaktivujeme objekt
-        poolDictionary[prefabUsedToPool].Enqueue(obj); // Vrátíme ho zpìt do fronty poolu
+        poolDictionary[prefabUsedToPool].Enqueue(obj); // Vrï¿½tï¿½me ho zpï¿½t do fronty poolu
     }
 }

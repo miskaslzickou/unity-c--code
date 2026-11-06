@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class HomingProjectile : MonoBehaviour
 {
@@ -8,8 +8,8 @@ public class HomingProjectile : MonoBehaviour
     private Vector2 projectileDirection;
 
     public float lifetime = 1.5f;
-    private Transform Target; // Cíl pro homing projektily
-    Vector2 targetDirection; // Smìr k cíli pro homing
+    private Transform Target; // Cï¿½l pro homing projektily
+    Vector2 targetDirection; // Smï¿½r k cï¿½li pro homing
     private GameObject originalPrefab;
 
     void Awake()
@@ -36,9 +36,9 @@ public class HomingProjectile : MonoBehaviour
     {
         projectileSpeed = speed;
         projectileDirection = direction.normalized;
-        // Uložte si referenci na originální prefab
-        this.originalPrefab = prefab; // <-- Uložení reference
-        Target = target; // Uložení cíle pro homing
+        // Uloï¿½te si referenci na originï¿½lnï¿½ prefab
+        this.originalPrefab = prefab; // <-- Uloï¿½enï¿½ reference
+        Target = target; // Uloï¿½enï¿½ cï¿½le pro homing
         if (rb != null)
         {
             rb.AddForce(projectileDirection * (projectileSpeed*0.3f), ForceMode2D.Impulse);
@@ -52,7 +52,7 @@ public class HomingProjectile : MonoBehaviour
 
   
 
-    // Metoda pro deaktivaci/vrácení objektu do poolu
+    // Metoda pro deaktivaci/vrï¿½cenï¿½ objektu do poolu
     private void DeactivateProjectile()
     {
         // NOVINKA: Zavolejte ObjectPoolManager.Instance.ReturnObjectToPool()
@@ -62,15 +62,15 @@ public class HomingProjectile : MonoBehaviour
         }
         else
         {
-            // Nouzové øešení, pokud nìco selže (nemìl by se stát s dobøe nastaveným poolingen)
-            Debug.LogWarning("Nelze vrátit objekt do poolu. Možná chybí prefab nebo manažer poolu. Nièím.");
+            // Nouzovï¿½ ï¿½eï¿½enï¿½, pokud nï¿½co selï¿½e (nemï¿½l by se stï¿½t s dobï¿½e nastavenï¿½m poolingen)
+            Debug.LogWarning("Nelze vrï¿½tit objekt do poolu. Moï¿½nï¿½ chybï¿½ prefab nebo manaï¿½er poolu. Niï¿½ï¿½m.");
             Destroy(gameObject);
         }
     }
-    void OnCollisionEnter2D(Collision2D collision) // Opraven název parametru
+    void OnCollisionEnter2D(Collision2D collision) // Opraven nï¿½zev parametru
     {
      
-        Debug.Log("Projektil zasáhl (Kolize): " + collision.gameObject.name);
+        Debug.Log("Projektil zasï¿½hl (Kolize): " + collision.gameObject.name);
 
      
         DeactivateProjectile();
@@ -86,19 +86,19 @@ public class HomingProjectile : MonoBehaviour
             
             Vector2 directionToTarget = Target.position - transform.position;
 
-            // 2. Vypoèítáme cílový úhel (ve stupních)
-            // Toto je úhel, na který by se mìla transform.up objektu otoèit, aby smìøovala k cíli.
+            // 2. Vypoï¿½ï¿½tï¿½me cï¿½lovï¿½ ï¿½hel (ve stupnï¿½ch)
+            // Toto je ï¿½hel, na kterï¿½ by se mï¿½la transform.up objektu otoï¿½it, aby smï¿½ï¿½ovala k cï¿½li.
             float targetAngle = Vector2.SignedAngle(Vector2.up, directionToTarget);
 
-            // 3. Vypoèítáme aktuální úhel Rigidbody2D
-            // rb.rotation je úhel kolem Z osy (ve stupních)
+            // 3. Vypoï¿½ï¿½tï¿½me aktuï¿½lnï¿½ ï¿½hel Rigidbody2D
+            // rb.rotation je ï¿½hel kolem Z osy (ve stupnï¿½ch)
             float currentAngle = rb.rotation;
 
-            // 4. Plynule interpolujeme mezi aktuálním a cílovým úhlem
-            // Mathf.LerpAngle je skvìlá pro interpolaci úhlù, protože správnì zvládá pøechody pøes 360/0 stupòù.
+            // 4. Plynule interpolujeme mezi aktuï¿½lnï¿½m a cï¿½lovï¿½m ï¿½hlem
+            // Mathf.LerpAngle je skvï¿½lï¿½ pro interpolaci ï¿½hlï¿½, protoï¿½e sprï¿½vnï¿½ zvlï¿½dï¿½ pï¿½echody pï¿½es 360/0 stupï¿½ï¿½.
             float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, 20 * Time.fixedDeltaTime);
 
-            // 5. Nastavíme novou rotaci Rigidbody2D
+            // 5. Nastavï¿½me novou rotaci Rigidbody2D
             rb.MoveRotation(newAngle);
         }
     }

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections; // Pro Invoke a Coroutines
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -7,13 +7,13 @@ public class ProjectileControl : MonoBehaviour
     private Rigidbody2D rb;
     private float projectileSpeed;
     private Vector2 projectileDirection;
-    // Pøíklad poškození - v Initialize se nastavuje, ale zde není promìnná pro uložení. Mùžeš pøidat:
+    // Pï¿½ï¿½klad poï¿½kozenï¿½ - v Initialize se nastavuje, ale zde nenï¿½ promï¿½nnï¿½ pro uloï¿½enï¿½. Mï¿½ï¿½eï¿½ pï¿½idat:
     // private float projectileDamage; 
 
     public float lifetime = 1.5f;
 
-    // NOVINKA: Zde budeme uchovávat referenci na originální prefab
-    // aby ObjectPoolManager vìdìl, do kterého poolu objekt vrátit.
+    // NOVINKA: Zde budeme uchovï¿½vat referenci na originï¿½lnï¿½ prefab
+    // aby ObjectPoolManager vï¿½dï¿½l, do kterï¿½ho poolu objekt vrï¿½tit.
     private GameObject originalPrefab;
 
     void Awake()
@@ -21,42 +21,42 @@ public class ProjectileControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // OnEnable se volá pokaždé, když se objekt aktivuje (vytvoøí nebo vytáhne z poolu)
+    // OnEnable se volï¿½ pokaï¿½dï¿½, kdyï¿½ se objekt aktivuje (vytvoï¿½ï¿½ nebo vytï¿½hne z poolu)
     void OnEnable()
     {
         if (rb != null)
         {
-            // Resetování rychlosti pøi aktivaci je dobré
+            // Resetovï¿½nï¿½ rychlosti pï¿½i aktivaci je dobrï¿½
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
         }
 
-        // Zrušíme pøípadné pøedchozí Invoke a nastavíme nové pro životnost
-        CancelInvoke("DeactivateProjectile"); // Ujisti se, že zrušíš konkrétní metodu
+        // Zruï¿½ï¿½me pï¿½ï¿½padnï¿½ pï¿½edchozï¿½ Invoke a nastavï¿½me novï¿½ pro ï¿½ivotnost
+        CancelInvoke("DeactivateProjectile"); // Ujisti se, ï¿½e zruï¿½ï¿½ konkrï¿½tnï¿½ metodu
         Invoke("DeactivateProjectile", lifetime);
     }
 
-    // OnDisable se volá, když se objekt deaktivuje (vrací do poolu nebo nièí)
+    // OnDisable se volï¿½, kdyï¿½ se objekt deaktivuje (vracï¿½ do poolu nebo niï¿½ï¿½)
     void OnDisable()
     {
-        // Zrušíme všechny Invoke volání, aby se nespouštìly po vrácení do poolu
+        // Zruï¿½ï¿½me vï¿½echny Invoke volï¿½nï¿½, aby se nespouï¿½tï¿½ly po vrï¿½cenï¿½ do poolu
         CancelInvoke("DeactivateProjectile");
     }
 
     /// <summary>
-    /// Inicializuje projektil s jeho parametry a referencí na originální prefab.
+    /// Inicializuje projektil s jeho parametry a referencï¿½ na originï¿½lnï¿½ prefab.
     /// </summary>
     /// <param name="speed">Rychlost projektilu.</param>
-    /// <param name="direction">Smìr letu projektilu.</param>
-    /// <param name="damage">Poškození zpùsobené projektilem.</param>
-    /// <param name="prefab">Originální prefab tohoto projektilu, pro návrat do poolu.</param>
+    /// <param name="direction">Smï¿½r letu projektilu.</param>
+    /// <param name="damage">Poï¿½kozenï¿½ zpï¿½sobenï¿½ projektilem.</param>
+    /// <param name="prefab">Originï¿½lnï¿½ prefab tohoto projektilu, pro nï¿½vrat do poolu.</param>
     public void Initialize(float speed, Vector2 direction, float damage, GameObject prefab)
     {
         projectileSpeed = speed;
         projectileDirection = direction.normalized;
-        // projectileDamage = damage; // Pokud pøidáš privátní promìnnou pro damage
+        // projectileDamage = damage; // Pokud pï¿½idï¿½ privï¿½tnï¿½ promï¿½nnou pro damage
 
-        this.originalPrefab = prefab; // Uložení reference na originální prefab
+        this.originalPrefab = prefab; // Uloï¿½enï¿½ reference na originï¿½lnï¿½ prefab
 
         if (rb != null)
         {
@@ -69,33 +69,33 @@ public class ProjectileControl : MonoBehaviour
     }
 
    
-    // --- Volitelné: Pokud používáš pevné kolize místo Triggerù ---
-    // Tato metoda se volá, když se Collider2D objektu srazí s jiným Collider2D (fyzická kolize).
-    // Používej jen jednu z nich (OnTriggerEnter2D NEBO OnCollisionEnter2D) podle toho, jak máš nastaven Collider.
-    void OnCollisionEnter2D(Collision2D collision) // Opraven název parametru
+    // --- Volitelnï¿½: Pokud pouï¿½ï¿½vï¿½ pevnï¿½ kolize mï¿½sto Triggerï¿½ ---
+    // Tato metoda se volï¿½, kdyï¿½ se Collider2D objektu srazï¿½ s jinï¿½m Collider2D (fyzickï¿½ kolize).
+    // Pouï¿½ï¿½vej jen jednu z nich (OnTriggerEnter2D NEBO OnCollisionEnter2D) podle toho, jak mï¿½ nastaven Collider.
+    void OnCollisionEnter2D(Collision2D collision) // Opraven nï¿½zev parametru
     {
-        // Vyluè, aby projektil detekoval kolizi sám se sebou nebo s objektem, ze kterého byl vystøelen
+        // Vyluï¿½, aby projektil detekoval kolizi sï¿½m se sebou nebo s objektem, ze kterï¿½ho byl vystï¿½elen
         // if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Projectile")) return;
 
-        Debug.Log("Projektil zasáhl (Kolize): " + collision.gameObject.name);
+        Debug.Log("Projektil zasï¿½hl (Kolize): " + collision.gameObject.name);
 
-        // Zde mùžete pøidat logiku poškození cíle
+        // Zde mï¿½ï¿½ete pï¿½idat logiku poï¿½kozenï¿½ cï¿½le
         // Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         // if (enemy != null)
         // {
         //     enemy.TakeDamage(projectileDamage);
         // }
 
-        // Okamžitá deaktivace projektilu po kolizi
+        // Okamï¿½itï¿½ deaktivace projektilu po kolizi
         DeactivateProjectile();
     }
 
 
-    // Metoda pro deaktivaci/vrácení objektu do poolu
+    // Metoda pro deaktivaci/vrï¿½cenï¿½ objektu do poolu
     private void DeactivateProjectile()
     {
-        // Pøed vrácením do poolu vypneme GameObject
-        // To je dùležité, protože pool pracuje s neaktivními objekty
+        // Pï¿½ed vrï¿½cenï¿½m do poolu vypneme GameObject
+        // To je dï¿½leï¿½itï¿½, protoï¿½e pool pracuje s neaktivnï¿½mi objekty
         gameObject.SetActive(false);
 
         // Zavolejte ObjectPoolManager.Instance.ReturnObjectToPool()
@@ -105,8 +105,8 @@ public class ProjectileControl : MonoBehaviour
         }
         else
         {
-            // Nouzové øešení, pokud nìco selže (nemìl by se stát s dobøe nastaveným poolingem)
-            Debug.LogWarning("Nelze vrátit objekt do poolu. Možná chybí prefab nebo manažer poolu. Nièím pøímo.", this);
+            // Nouzovï¿½ ï¿½eï¿½enï¿½, pokud nï¿½co selï¿½e (nemï¿½l by se stï¿½t s dobï¿½e nastavenï¿½m poolingem)
+            Debug.LogWarning("Nelze vrï¿½tit objekt do poolu. Moï¿½nï¿½ chybï¿½ prefab nebo manaï¿½er poolu. Niï¿½ï¿½m pï¿½ï¿½mo.", this);
             Destroy(gameObject);
         }
     }
