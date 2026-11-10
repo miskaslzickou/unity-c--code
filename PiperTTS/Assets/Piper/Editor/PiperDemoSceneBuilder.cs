@@ -1,3 +1,4 @@
+#if UNITY_INFERENCE_ENGINE && NEWTONSOFT_JSON
 using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -123,3 +124,5 @@ namespace Piper.EditorTools
         }
     }
 }
+
+#endif

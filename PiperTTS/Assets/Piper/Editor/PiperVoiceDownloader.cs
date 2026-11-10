@@ -1,3 +1,4 @@
+#if UNITY_INFERENCE_ENGINE && NEWTONSOFT_JSON
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -421,3 +422,5 @@ ScriptedImporter:
         }
     }
 }
+
+#endif

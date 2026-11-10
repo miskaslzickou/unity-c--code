@@ -1,3 +1,4 @@
+#if UNITY_INFERENCE_ENGINE && NEWTONSOFT_JSON
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -275,3 +276,5 @@ namespace Piper
         }
     }
 }
+
+#endif

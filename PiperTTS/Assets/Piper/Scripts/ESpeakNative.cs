@@ -1,3 +1,4 @@
+#if UNITY_INFERENCE_ENGINE && NEWTONSOFT_JSON
 using System;
 using System.Runtime.InteropServices;
 
@@ -29,3 +30,5 @@ namespace Piper
         public static extern int espeak_Terminate();
     }
 }
+
+#endif

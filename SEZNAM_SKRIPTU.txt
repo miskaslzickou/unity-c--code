@@ -1,0 +1,626 @@
+================================================================================
+              KATALOG A SEZNAM VŠECH SKRIPTŮ (UNITY C# REPOSITORY)
+================================================================================
+Tento dokument obsahuje kompletní přehled všech 107 C# systémů a modulů
+roztříděných do přehledných tematických složek podle architektury.
+Generováno: 10.11.2026
+Celkem systémů: 107 skriptů v 15 modulech
+
+================================================================================
+OBSAH:
+--------------------------------------------------------------------------------
+1   /AI/                      - Umělá inteligence, vnímání, rozhodování a sociální grafy (9 skriptů)
+2   /Navigation/              - Navigace, pathfinding a prostorové indexování (5 skriptů)
+3   /TacticsAndCrowd/         - Formace jednotek, hejna a RTS řízení (3 skriptů)
+4   /Simulation/              - Ekonomika, tovární výroba, trhy, frakce a simulace světa (13 skriptů)
+5   /Infrastructure/          - Budování, silnice, křižovatky, železnice a sítě (7 skriptů)
+6   /PhysicsAndCombat/        - Fyzika, balistika, aerodynamika, orbity, radary a destrukce (15 skriptů)
+7   /Automotive/              - Fyzika vozidel, motory, diferenciály, pneumatiky a telemetrie (8 skriptů)
+8   /Aviation/                - Letecké simulace, motory, fly-by-wire, dogfight a ATC (9 skriptů)
+9   /Cybernetics/             - Logické obvody, virtuální VM počítače a sítě (4 skriptů)
+10  /PlayerAndControls/       - Ovládání hráče, vstupy, statistiky a kamera (5 skriptů)
+11  /Core/                    - Architektura, event bus, inventář, procedurální generátory a inspektor (10 skriptů)
+12  /AudioAndVFX/             - Vizuální efekty, mlha války, syntéza zvuku a rytmika (6 skriptů)
+13  /Assets/Editor/           - UI Toolkit nástroje: EditorProWorkspace & VisualInspectorStudio (4 skriptů)
+14  /PiperTTS/                - Lokální offline neurální syntéza řeči Piper (Text-to-Speech) (7 skriptů)
+15  /PixelLight2D/            - 2D pixel-artové dynamické osvětlení (2 skriptů)
+================================================================================
+
+
+--------------------------------------------------------------------------------
+1. SLOŽKA: /AI/ (Umělá inteligence, vnímání, rozhodování a sociální grafy)
+--------------------------------------------------------------------------------
+• AIDirector.cs
+  - Namespace: (Global)
+  - Třídy: AIDirector : MonoBehaviour
+  - Popis: Dynamický režisér tempa hry a napětí (pacing). Řídí křivku napětí (BuildUp, Peak, Relief), generuje vlny nepřátel a přepady (ambushes) podle aktuálního stavu a výkonu hráče.
+
+• AIPerception.cs
+  - Namespace: (Global)
+  - Třídy: AIPerception : MonoBehaviour
+  - Popis: Senzorický systém vnímání pro AI agenty. Obsahuje zorný kužel (Sight Cone) s detekcí překážek přes Raycast2D/3D, sluchový rádius (Hearing Radius) a paměť pro dočasné zapamatování si ztracených cílů.
+
+• BehaviorTree.cs
+  - Namespace: (Global)
+  - Třídy: BTNode, SelectorNode, SequenceNode, InverterNode, ActionNode
+  - Popis: Vysoce výkonný rozhodovací strom (Behavior Tree) s kompozitními uzly, dekorátory a akčními uzly s podporou stavů Success, Failure a Running.
+
+• ContextSteering.cs
+  - Namespace: GameSystems.AI
+  - Třídy: ContextSteering : MonoBehaviour
+  - Popis: Kontextové řízení pohybu (Context Behaviors). Používá polarizované mapy zájmu (Interest Maps) a nebezpečí (Danger Maps) pro plynulé obcházení překážek a manévrování v boji.
+
+• GOAPPlanner.cs
+  - Namespace: (Global)
+  - Třídy: GOAPPlanner : MonoBehaviour, GOAPAction, GOAPGoal, GOAPWorldState
+  - Popis: Plánování akcí orientované na cíle (Goal-Oriented Action Planning). Využívá A* stavový prohledávač pro dynamické sestavení optimální posloupnosti akcí k dosažení zadaného cíle.
+
+• HierarchicalStateMachine.cs
+  - Namespace: GameSystems.FSM
+  - Třídy: HierarchicalStateMachine, State, StateTransition
+  - Popis: Hierarchický konečný automat (HFSM) s podporou vnořených substavů, paralelních větví, podmínek přechodu a globálních prioritních triggerů pro komplexní chování bossů.
+
+• InfluenceMap.cs
+  - Namespace: GameSystems.Tactical
+  - Třídy: InfluenceMap : MonoBehaviour
+  - Popis: Taktická vlivová mřížka (Influence Map). Šíří hodnoty hrozeb (Threat), přátelského vlivu (Friendly) a zranitelnosti terénu pro strategické rozhodování taktické AI.
+
+• SocialNetworkAndConspiracyGraph.cs
+  - Namespace: (Global)
+  - Třídy: SocialNetworkAndConspiracyGraph : MonoBehaviour, SocialNode, SocialEdge, ConspiracyCell
+  - Popis: Sociální vztahový a konspirační graf entit. Modeluje přátelství, rivalitu, důvěru, šíření fám (rumor propagation) a odhalování tajných buněk spikleneckých frakcí.
+
+• UtilityBrain.cs
+  - Namespace: (Global)
+  - Třídy: UtilityBrain : MonoBehaviour, UtilityAction, UtilityCurve
+  - Popis: Rozhodovací systém založený na teorii užitku (Utility AI). Dynamicky vyhodnocuje matematické odezvové křivky (Response Curves) a vybírá nejvýhodnější akci v proměnlivém herním prostředí.
+
+
+--------------------------------------------------------------------------------
+2. SLOŽKA: /Navigation/ (Navigace, pathfinding a prostorové indexování)
+--------------------------------------------------------------------------------
+• AStarPathfinder.cs
+  - Namespace: UniversalAStarPathfinding
+  - Třídy: AStarPathfinder : MonoBehaviour, PathNode
+  - Popis: Univerzální A* algoritmus pro vyhledávání cest v 2D (Top-Down i Platformer se skoky a gravitací) a 3D mřížkách s diagonálním pohybem a Catmull-Rom vyhlazováním.
+
+• FlowFieldPathfinder.cs
+  - Namespace: GameSystems.Navigation
+  - Třídy: FlowFieldPathfinder : MonoBehaviour, FlowFieldCell
+  - Popis: Vektorové tokové pole (Flow Field). Počítá integrační pole a směrové vektory pro simultánní navigaci tisíců jednotek k jednomu nebo více cílům bez poklesu výkonu.
+
+• RVO2Simulator.cs
+  - Namespace: GameSystems.Crowd
+  - Třídy: RVO2Simulator : MonoBehaviour, RVOAgent, Obstacle2D
+  - Popis: Reciprocal Velocity Obstacles (RVO2) algoritmus pro lokální vyhýbání se kolizím mezi stovkami samostatných agentů v reálném čase bez vzájemného zasekávání a kolísání rychlostí.
+
+• SpatialHashGrid.cs
+  - Namespace: GameSystems.Spatial
+  - Třídy: SpatialHashGrid<T>
+  - Popis: Ultrarychlá generická prostorová hašovací mřížka pro 2D/3D prostor. Nahrazuje náročná OverlapCircle volání dotazy v konstantním čase O(1) (QueryRadius, QueryAABB).
+
+• UniversalPathfindingAgent.cs
+  - Namespace: UniversalAStarPathfinding
+  - Třídy: UniversalPathfindingAgent : MonoBehaviour
+  - Popis: Samostatná komponenta agenta pro plynulý pohyb po nalezené trase s adaptivním zpomalováním v zatáčkách, fyzikálním řízením přes Rigidbody a detekcí dosažení waypointů.
+
+
+--------------------------------------------------------------------------------
+3. SLOŽKA: /TacticsAndCrowd/ (Formace jednotek, hejna a RTS řízení)
+--------------------------------------------------------------------------------
+• FlockingBrain.cs
+  - Namespace: (Global)
+  - Třídy: FlockingBrain : MonoBehaviour, BoidAgent
+  - Popis: Reynoldsovo hejnové chování (Boids). Implementuje síly separace, soudržnosti (cohesion), zarovnání směru (alignment) a únik před predátory pro ptačí hejna, hejna ryb i rojové drony.
+
+• FormationBrain.cs
+  - Namespace: (Global)
+  - Třídy: FormationBrain : MonoBehaviour, FormationPattern
+  - Popis: Taktické vojenské formace jednotek (Box, Wedge, Line, Circle, Echelon). Dynamicky přiřazuje sloty jednotkám, otáčí formaci ve směru pochodu a adaptivně udržuje rozestupy.
+
+• RTSSelectionAndGroupManager.cs
+  - Namespace: GameSystems.RTS
+  - Třídy: RTSSelectionAndGroupManager : MonoBehaviour
+  - Popis: RTS systém výběru jednotek myší (obdélníkový drag-box selection), ukládání do kontrolních skupin (klávesy 0-9), přidávání jednotek přes Shift a hromadné zadávání rozkazů k pohybu.
+
+
+--------------------------------------------------------------------------------
+4. SLOŽKA: /Simulation/ (Ekonomika, tovární výroba, trhy, frakce a simulace světa)
+--------------------------------------------------------------------------------
+• BankingCreditAndInflationEngine.cs
+  - Namespace: GameSystems.Economy
+  - Třídy: BankingCreditAndInflationEngine : MonoBehaviour, LoanContract, BankEntity
+  - Popis: Centrální a komerční bankovní systém. Simuluje frakční rezervy, emisi úvěrů s úrokovou mírou, dluhopisy, míru inflace a vliv nabídky peněz na tržní ceny.
+
+• CellularAutomataSim.cs
+  - Namespace: GameSystems.Simulation
+  - Třídy: CellularAutomataSim : MonoBehaviour
+  - Popis: Vysoce optimalizovaný 2D simulátor buněčných automatů na plochém 1D poli. Simuluje šíření plamenů, kouře, proudění kapalin/vody a rozptyl environmentálního znečištění.
+
+• ContrabandAndCustomsInspectionSim.cs
+  - Namespace: GameSystems.Economy
+  - Třídy: ContrabandAndCustomsInspectionSim : MonoBehaviour, ContrabandDefinition, CargoContainer
+  - Popis: Celní a inspekční kontrolní systém pašovaného zboží. Modeluje falešná dna kufrů, rentgenové skenery, detekční psy, podplácení celníků a dynamiku černého trhu.
+
+• CrimeSceneAndForensicsTracker.cs
+  - Namespace: GameSystems.Forensics
+  - Třídy: CrimeSceneAndForensicsTracker : MonoBehaviour, EvidenceRecord, ClueChain
+  - Popis: Detektivní a forenzní systém vyšetřování místa činu. Sleduje otisky prstů, balistické rýhy, krevní stříkance, čas rozkladu důkazů a rekonstrukci řetězce událostí.
+
+• DynamicFactionAndTreatyEngine.cs
+  - Namespace: (Global)
+  - Třídy: DynamicFactionAndTreatyEngine : MonoBehaviour, FactionEntity, DiplomaticTreaty
+  - Popis: Diplomatický systém frakcí a mezinárodních smluv. Zahrnuje aliance, pakty o neútočení, obchodní dohody, vyhlašování válek a matici reputačních vztahů.
+
+• DynamicMarketEconomy.cs
+  - Namespace: GameSystems.Economy
+  - Třídy: DynamicMarketEconomy : MonoBehaviour, MarketPool<T>, ITradableAsset, PhysicalResourceAsset
+  - Popis: Generická tržní simulace nabídky a poptávky. Obsahuje vzorce pro výpočet cenové rovnováhy, komoditní burzu, akcie a kruhový buffer pro cenové grafy.
+
+• EcosystemEvolutionSim.cs
+  - Namespace: (Global)
+  - Třídy: EcosystemEvolutionSim : MonoBehaviour, OrganismEntity
+  - Popis: Biologická simulace ekosystému a evoluce organismů. Zahrnuje potravní řetězce, energii, věk, reprodukci a náhodné genetické mutace fyzických i chování vlastností.
+
+• EpidemicAndPathogenSpreadSim.cs
+  - Namespace: (Global)
+  - Třídy: EpidemicAndPathogenSpreadSim : MonoBehaviour, HostEntity, PathogenStrain
+  - Popis: Epidemiologický model SEIR (Susceptible, Exposed, Infected, Recovered). Simuluje šíření patogenů vzduchem/kontaktem, virové mutace, imunitní odezvu a karanténní opatření.
+
+• GeneticsAndTraitCrossbreeder.cs
+  - Namespace: (Global)
+  - Třídy: GeneticsAndTraitCrossbreeder : MonoBehaviour, Genome, GeneTrait
+  - Popis: Mendelistická genetika a křížení vlastností. Obsahuje dominantní a recesivní alely, genovou rekombinaci, fenotypické vyjádření barvy/velikosti a mutační odchylky.
+
+• OrderBookAndMatchingEngine.cs
+  - Namespace: GameSystems.Economy
+  - Třídy: OrderBookAndMatchingEngine : MonoBehaviour, AssetOrderBook, OrderEntry
+  - Popis: Finanční kniha objednávek (Order Book) a párovací motor burzy. Zpracovává Limit i Market příkazy, udržuje fronty nákupů a prodejů podle ceny a času (FIFO).
+
+• ProductionChainNode.cs
+  - Namespace: GameSystems.Factory
+  - Třídy: ProductionChainNode : MonoBehaviour, ProductionRecipeSO
+  - Popis: Výrobní uzel pro továrny a dílny (ve stylu Factorio). Zpracovává recepty, spravuje vstupní a výstupní sklady, spotřebovává energii/vodu a generuje emise.
+
+• ThermalAndCoolantLoopSim.cs
+  - Namespace: GameSystems.Thermal
+  - Třídy: ThermalAndCoolantLoopSim : MonoBehaviour, ThermalNode, CoolantLoop
+  - Popis: Termodynamická simulace generování tepla a chladicích smyček. Modeluje radiátory, tepelnou vodivost komponent, čerpadla chladiva a přehřívání reaktorů.
+
+• TickSimulationManager.cs
+  - Namespace: GameSystems.Simulation
+  - Třídy: TickSimulationManager : MonoBehaviour, ITickable
+  - Popis: Deterministické simulační hodiny s pevnou frekvencí nezávislou na snímkové frekvenci (FPS). Rozděluje výpočetní zátěž (time-slicing) mezi framy pro 10 000+ entit.
+
+
+--------------------------------------------------------------------------------
+5. SLOŽKA: /Infrastructure/ (Budování, silnice, křižovatky, železnice a sítě)
+--------------------------------------------------------------------------------
+• AutoTileBitmasker.cs
+  - Namespace: GameSystems.Tiles
+  - Třídy: AutoTileBitmasker : MonoBehaviour, RuleTileSetSO
+  - Popis: Algoritmus bitmaskingu pro autotiling dlaždic (Wang 47-tile a 16-tile). Automaticky vybírá správné rohové a hranové sprity podle okolních 8 sousedů.
+
+• GridPlacementSystem.cs
+  - Namespace: GameSystems.Construction
+  - Třídy: GridPlacementSystem : MonoBehaviour
+  - Popis: Mřížkový stavební systém budov. Zahrnuje kolizní kontrolu terénu, otáčení objektů v 90° krocích, ghost preview model s barevným značením validity a okamžité stavění.
+
+• RailBlockSignalingSystem.cs
+  - Namespace: GameSystems.Railways
+  - Třídy: RailBlockSignalingSystem : MonoBehaviour, RailSignalNode
+  - Popis: Železniční zabezpečovací systém blokových návěstidel. Udržuje rezervace úseků kolejí, brání srážkám vlaků a bezpečně řídí průjezd výhybkami.
+
+• ResourceNetworkGraph.cs
+  - Namespace: GameSystems.Utilities
+  - Třídy: ResourceNetworkGraph : MonoBehaviour, NetworkNode, NetworkEdge
+  - Popis: Grafová distribuční síť pro elektrická vedení a vodovodní potrubí. Využívá BFS algoritmus pro efektivní přenos komodit od elektráren/zdrojů ke spotřebičům.
+
+• SplineRoadBuilder.cs
+  - Namespace: GameSystems.Roads
+  - Třídy: SplineRoadBuilder : MonoBehaviour
+  - Popis: Procedurální generátor silnic a cest ze spline křivek. Generuje 3D/2D mesh s plynulým Catmull-Rom vyhlazením, UV mapováním a křížením vozovek.
+
+• TrafficIntersectionController.cs
+  - Namespace: GameSystems.Traffic
+  - Třídy: TrafficIntersectionController : MonoBehaviour, TrafficPhase
+  - Popis: Inteligentní řadič křižovatek pro řízení semaforů. Podporuje semaforové fáze, vyklizovací časy a adaptivní zelenou vlnu dle aktuální hustoty dopravy.
+
+• UniversalLevelGenerator.cs
+  - Namespace: UniversalLevelToolkit
+  - Třídy: UniversalLevelGenerator : MonoBehaviour
+  - Popis: Procedurální generátor dungeonů a levelů. Využívá binární dělení prostoru (BSP), propojovací koridory a buněčné automaty pro organické jeskyně.
+
+
+--------------------------------------------------------------------------------
+6. SLOŽKA: /PhysicsAndCombat/ (Fyzika, balistika, aerodynamika, orbity, radary a destrukce)
+--------------------------------------------------------------------------------
+• AerodynamicsAndLiftSurfaceSolver.cs
+  - Namespace: GameSystems.PhysicsAndCombat
+  - Třídy: AerodynamicsAndLiftSurfaceSolver : MonoBehaviour, LiftingSurface
+  - Popis: Výpočetní aerodynamika nosných ploch. Simuluje vztlak (Lift), indukovaný odpor (Drag), úhel náběhu (AoA), pádovou rychlost (stall) a výchylky křidélek/klapek.
+
+• BallisticsAndPenetrationSolver.cs
+  - Namespace: GameSystems.PhysicsAndCombat
+  - Třídy: BallisticsAndPenetrationSolver : MonoBehaviour, ArmorPlate
+  - Popis: Terminální balistika a penetrace pancíře. Počítá efektivní tloušťku skloněného pancíře, mechaniku odrazů (ricochet), lámání střel a tvorbu vnitřních střepin (spalling).
+
+• DamageControlAndCompartmentSim.cs
+  - Namespace: GameSystems.PhysicsAndCombat
+  - Třídy: DamageControlAndCompartmentSim : MonoBehaviour, BulkheadDoor, HullCompartment
+  - Popis: Systém havarijního řízení poškození trupu lodí a stanic. Modeluje zaplavování sekcí vodou, úniky atmosféry, přetlakové dveře a šíření vnitřních požárů.
+
+• GrappleController2D.cs
+  - Namespace: (Global)
+  - Třídy: GrappleController2D : MonoBehaviour
+  - Popis: Vystřelovací kotva (grappling hook) s fyzikou lana. Umožňuje zhoupnutí postavy, přitahování (reel-in) a dynamické navíjení kolem překážek.
+
+• HP.cs
+  - Namespace: (Global)
+  - Třídy: HP : MonoBehaviour
+  - Popis: Správa zdraví, štítů, redukce poškození pancířem a léčení entit. Publikuje události do ZeroGCEventBus a poskytuje data pro vyhodnocování AI v UtilityBrain.
+
+• HomingProjectile.cs
+  - Namespace: (Global)
+  - Třídy: HomingProjectile : MonoBehaviour
+  - Popis: Samonaváděcí projektil a raketa. Využívá proporcionální navigaci (Proportional Navigation) pro realistické a přesné sledování manévrujícího cíle.
+
+• MarchingSquaresDestructibleTerrain.cs
+  - Namespace: (Global)
+  - Třídy: MarchingSquaresDestructibleTerrain : MonoBehaviour, TerrainChunk
+  - Popis: Destruovatelný terén generovaný v reálném čase algoritmem Marching Squares/Cubes. Umožňuje vykusování kráterů po explozích, vrtání tunelů a generování kolizí.
+
+• OrbitalMechanicsAndGravitySolver.cs
+  - Namespace: GameSystems.PhysicsAndCombat
+  - Třídy: OrbitalMechanicsAndGravitySolver : MonoBehaviour, CelestialBody, OrbitTrajectory
+  - Popis: Keplerovská orbitální mechanika a N-tělesová gravitace. Počítá eliptické i hyperbolické trajektorie, Hohmannovy přechodové orbity a predikci letu.
+
+• PIDControllerAndAutopilotSuite.cs
+  - Namespace: GameSystems.PhysicsAndCombat
+  - Třídy: PIDControllerAndAutopilotSuite : MonoBehaviour, PID3D
+  - Popis: Sada proporcionálně-integračně-derivačních (PID) regulátorů s ochranou proti přesycení (anti-windup). Zajišťuje stabilizaci plavidel, držení výšky a autopilot.
+
+• PortalAndNonEuclideanView2D.cs
+  - Namespace: (Global)
+  - Třídy: PortalAndNonEuclideanView2D : MonoBehaviour, PortalTraveler, PortalPair
+  - Popis: 2D portálový systém a neeukleidovský prostor. Zajišťuje bezešvý průhled portálem přes renderovací textury, zachování hybnosti a okamžitou rekurzivní teleportaci.
+
+• ProceduralIKSolver2D.cs
+  - Namespace: GameSystems.Animation2D
+  - Třídy: ProceduralIKSolver2D : MonoBehaviour, JointAngularConstraint2D
+  - Popis: 2D Procedurální IK řešič. Podporuje analytický 2-Bone IK s clampingem, N-kostní iterační FABRIK pro chapadla s úhlovými limity a procedurální krokování nohou mechů.
+
+• ProjectileControl.cs
+  - Namespace: (Global)
+  - Třídy: ProjectileControl : MonoBehaviour
+  - Popis: Fyzikální balistický projektil s gravitací, odporem vzduchu, postupným úbytkem kinetické energie, průrazem materiálů a odrazy od pevných povrchů.
+
+• RadarAndEMSignatureSim.cs
+  - Namespace: GameSystems.PhysicsAndCombat
+  - Třídy: RadarAndEMSignatureSim : MonoBehaviour, TargetEMSignature
+  - Popis: Simulátor radaru a elektromagnetické signatury (RCS). Zahrnuje aktivní pulzní Dopplerův radar, pasivní RWR varovný přijímač a zaměřování cílů (Lock-On).
+
+• RopeAndPulleyWinchPhysics.cs
+  - Namespace: GameSystems.PhysicsAndCombat
+  - Třídy: RopeAndPulleyWinchPhysics : MonoBehaviour, PulleySheave
+  - Popis: Fyzika lanových navijáků a kladkostrojů. Modeluje mechanickou výhodu kladkových soustav, dynamické tahové napětí lana a navíjení břemen jeřáby.
+
+• VerletRope.cs
+  - Namespace: (Global)
+  - Třídy: VerletRope : MonoBehaviour, VerletNode
+  - Popis: Fyzikální simulace lan, kabelů a visutých mostů pomocí Verletovy integrace s nastavitelným počtem iterací délkového uvolnění pro maximální stabilitu.
+
+
+--------------------------------------------------------------------------------
+7. SLOŽKA: /Automotive/ (Fyzika vozidel, motory, diferenciály, pneumatiky a telemetrie)
+--------------------------------------------------------------------------------
+• ActiveElectronicsAndDriverAssists.cs
+  - Namespace: (Global)
+  - Třídy: ActiveElectronicsAndDriverAssists : MonoBehaviour
+  - Popis: Aktivní elektronické asistenční systémy vozidel. Zahrnuje protiblokovací brzdový systém (ABS), kontrolu trakce (TCS), elektronickou stabilizaci (ESP) a Torque Vectoring.
+
+• DrivetrainAndDifferentialSolver.cs
+  - Namespace: (Global)
+  - Třídy: DrivetrainAndDifferentialSolver : MonoBehaviour, DifferentialAssembly
+  - Popis: Řešič pohonu kol a diferenciálů. Simuluje otevřené, uzamykatelné a samosvorné (LSD) diferenciály, rozdělení točivého momentu na nápravy a stupně převodovky.
+
+• InternalCombustionAndTurboSim.cs
+  - Namespace: (Global)
+  - Třídy: InternalCombustionAndTurboSim : MonoBehaviour
+  - Popis: Termodynamická simulace spalovacího motoru. Modeluje otáčkoměr, točivý moment z křivky, prodlevu turbodmychadla (turbo lag), chlazení mezichladičem a spotřebu paliva.
+
+• MultiAxleTrailerAndHitchPhysics.cs
+  - Namespace: (Global)
+  - Třídy: MultiAxleTrailerAndHitchPhysics : MonoBehaviour, TrailerAxle
+  - Popis: Fyzika víconápravových návěsů a tažných zařízení. Simuluje kloubové spojení čepem, natáčení vlečených náprav a prevenci zalomení soupravy (jackknifing).
+
+• PacejkaTireAndDriftPhysics.cs
+  - Namespace: (Global)
+  - Třídy: PacejkaTireAndDriftPhysics : MonoBehaviour, WheelTireData
+  - Popis: Fyzikální model pneumatik podle Pacejkovy 'Magic Formula'. Počítá podélný prokluz, úhel skluzu (slip angle), přechod ze statického tření do řízeného driftu.
+
+• RacingLineAndApexOptimizer.cs
+  - Namespace: (Global)
+  - Třídy: RacingLineAndApexOptimizer : MonoBehaviour, TrackWaypoint
+  - Popis: Optimalizátor závodní stopy na závodním okruhu. Minimalizuje zakřivení trajektorie, hledá geometrický i pozdní apex zatáček a počítá optimální brzdné body.
+
+• SuspensionAndAeroDownforceSim.cs
+  - Namespace: (Global)
+  - Třídy: SuspensionAndAeroDownforceSim : MonoBehaviour, SuspensionStrut
+  - Popis: Simulace pružinového odpružení a aerodynamického přítlaku. Zahrnuje tlumiče s kompresí a odskokem, příčné zkrutné stabilizátory a přítlačná křídla s ground effectem.
+
+• VehicleTelemetryAndDynoLogger.cs
+  - Namespace: (Global)
+  - Třídy: VehicleTelemetryAndDynoLogger : MonoBehaviour, DynoRunRecord
+  - Popis: Měřicí stanice a telemetrický záznamník vozidel (Dyno). Zaznamenává výkon v koních, krouticí moment, zrychlení 0-100 km/h a exportuje naměřená data do CSV.
+
+
+--------------------------------------------------------------------------------
+8. SLOŽKA: /Aviation/ (Letecké simulace, motory, fly-by-wire, dogfight a ATC)
+--------------------------------------------------------------------------------
+• AircraftFuelAndCGShiftManager.cs
+  - Namespace: (Global)
+  - Třídy: AircraftFuelAndCGShiftManager : MonoBehaviour, AircraftFuelTank
+  - Popis: Palivový systém letadel s dynamickým posunem těžiště (CG). Simuluje křídelní a trupové nádrže, přečerpávání paliva mezi nádržemi a nouzové odpouštění paliva.
+
+• AirTrafficControlAndRunwayGraph.cs
+  - Namespace: (Global)
+  - Třídy: AirTrafficControlAndRunwayGraph : MonoBehaviour, ATCGraphNode, FlightStrip
+  - Popis: Graf letištního dispečinku (ATC) a ranvejí. Řídí navádění na přistání, vyčkávací okruhy (holding patterns), pojíždění po taxidr維ách a povolení ke startu.
+
+• CountermeasuresAndEWDispenser.cs
+  - Namespace: (Global)
+  - Třídy: CountermeasuresAndEWDispenser : MonoBehaviour, CountermeasureSalvo
+  - Popis: Dávkovač protiopatření a elektronický boj (EW). Odpaluje tepelné klamné cíle (flares) a dipólové odražeče (chaff) pro zmatení radarových a infračervených střel.
+
+• DogfightAIAndBFMController.cs
+  - Namespace: (Global)
+  - Třídy: DogfightAIAndBFMController : MonoBehaviour
+  - Popis: Taktická umělá inteligence pro letecký souboj (Dogfight). Provádí manévry základního stíhacího boje (BFM): Immelmann, Split-S, High/Low Yo-Yo a nůžky (scissors).
+
+• FireControlAndLeadComputingSight.cs
+  - Namespace: (Global)
+  - Třídy: FireControlAndLeadComputingSight : MonoBehaviour
+  - Popis: Systém řízení palby a gyroskopický zaměřovač s předsazením (LCOS). Počítá bod setkání střel s manévrujícím cílem na základě vzdálenosti, balistiky a rychlosti.
+
+• FlyByWireAndFlightEnvelopeProtection.cs
+  - Namespace: (Global)
+  - Třídy: FlyByWireAndFlightEnvelopeProtection : MonoBehaviour
+  - Popis: Elektronické řízení letu (Fly-By-Wire) s obálkou letové ochrany. Omezuje maximální přetížení G-load, brání překročení kritického úhlu náběhu a pádu do vývrtky.
+
+• GFatigueAndPilotPhysiologySim.cs
+  - Namespace: (Global)
+  - Třídy: GFatigueAndPilotPhysiologySim : MonoBehaviour
+  - Popis: Fyziologická simulace pilota vystaveného přetížení. Simuluje zúžení zorného pole (tunnel vision), šedé vidění (greyout), ztrátu vědomí (G-LOC) a červené vidění (redout).
+
+• ILSAndCarrierLandingSystem.cs
+  - Namespace: (Global)
+  - Třídy: ILSAndCarrierLandingSystem : MonoBehaviour, ArrestorWire
+  - Popis: Přístrojový systém přistání (ILS) a palubní záchytný systém letadlových lodí. Poskytuje naváděcí paprsky sestupové roviny (glideslope/localizer) a zachycení lanem.
+
+• JetAndPropellerEngineSim.cs
+  - Namespace: (Global)
+  - Třídy: JetAndPropellerEngineSim : MonoBehaviour
+  - Popis: Simulace leteckých proudových motorů a vrtulí. Modeluje tah dmychadla, režim přídavného spalování (afterburner), pokles hustoty vzduchu s výškou a stoupání vrtule.
+
+
+--------------------------------------------------------------------------------
+9. SLOŽKA: /Cybernetics/ (Logické obvody, virtuální VM počítače a sítě)
+--------------------------------------------------------------------------------
+• CryptographyAndSignalDecoderSim.cs
+  - Namespace: GameSystems.Cybernetics
+  - Třídy: CryptographyAndSignalDecoderSim : MonoBehaviour, RadioSignalPacket
+  - Popis: Kryptografie a dekodér rádiového spektra. Zahrnuje frekvenční analýzu šifer, XOR maskování, vodopádový rádiový spektrogram a demodulaci signálů.
+
+• InGameProgrammableVM.cs
+  - Namespace: GameSystems.Cybernetics
+  - Třídy: InGameProgrammableVM : MonoBehaviour, VirtualCPU, OpCode
+  - Popis: Herní programovatelný virtuální počítač (VM). Obsahuje virtuální registry, aritmeticko-logickou jednotku (ALU), zásobník a interpreter assembleru.
+
+• LogicGateAndCircuitSimulator.cs
+  - Namespace: GameSystems.Cybernetics
+  - Třídy: LogicGateAndCircuitSimulator : MonoBehaviour, LogicNode, CircuitWire
+  - Popis: Simulátor digitálních logických obvodů. Modeluje logická hradla AND, OR, NOT, XOR, klopné obvody (Flip-Flops), multiplexery, sběrnice a hodinové impulsy.
+
+• VirtualNetworkAndHackingSim.cs
+  - Namespace: GameSystems.Cybernetics
+  - Třídy: VirtualNetworkAndHackingSim : MonoBehaviour, VirtualHost, NetworkPacket
+  - Popis: Simulovaná počítačová síť a hackerská konzole. Umožňuje skenování otevřených portů, prolamování firewallů, směrování paketů a spouštění terminálových exploitů.
+
+
+--------------------------------------------------------------------------------
+10. SLOŽKA: /PlayerAndControls/ (Ovládání hráče, vstupy, statistiky a kamera)
+--------------------------------------------------------------------------------
+• CameraController.cs
+  - Namespace: (Global)
+  - Třídy: CameraController : MonoBehaviour
+  - Popis: Plynulé sledování cíle kamerou (Smooth Follow) s nastavitelnou mrtvou zónou pohledu, ohraničením herní scény (clamping) a dynamickým zoomem.
+
+• InputManager.cs
+  - Namespace: (Global)
+  - Třídy: InputManager : MonoBehaviour
+  - Popis: Centrální wrapper a přístupový bod pro Unity New Input System. Sjednocuje čtení klávesnice, myši i herních ovladačů.
+
+• Movement.cs
+  - Namespace: (Global)
+  - Třídy: Movement : MonoBehaviour
+  - Popis: 2D fyzikální pohyb postavy a vozidla s plynulým zrychlením (throttle), rotací a strafováním přes Rigidbody2D.
+
+• PlayerControls.cs
+  - Namespace: (Global)
+  - Třídy: PlayerControls : IInputActionCollection2, IDisposable
+  - Popis: Automaticky generovaný C# kód mapování akcí pro New Input System (Move, Look, Fire, Interact).
+
+• PlayerStats.cs
+  - Namespace: (Global)
+  - Třídy: PlayerStats : MonoBehaviour
+  - Popis: Správa atributů hráče: zdraví, mana/energie, sběr zkušeností (XP), úrovně (leveling) a škálování statistik.
+
+
+--------------------------------------------------------------------------------
+11. SLOŽKA: /Core/ (Architektura, event bus, inventář, procedurální generátory a inspektor)
+--------------------------------------------------------------------------------
+• CommandBufferUndoSystem.cs
+  - Namespace: GameSystems.Commands
+  - Třídy: CommandBufferUndoSystem : MonoBehaviour, IGameCommand, MacroCommand
+  - Popis: Undo/Redo systém založený na návrhovém vzoru Command. Podporuje atomické makro-příkazy pro hromadné operace (např. stavba silnice o 20 polích).
+
+• DeterministicPRNGAndNoiseLibrary.cs
+  - Namespace: (Global)
+  - Třídy: DeterministicPRNGAndNoiseLibrary, FastNoiseCore, Xoshiro256Core
+  - Popis: Deterministický pseudonáhodný generátor čísel (Xoshiro256, PCG) a knihovna koherentního šumu (Simplex, Worley, Perlin, Fractal Brownian Motion).
+
+• LogisticsJobSystem.cs
+  - Namespace: GameSystems.Logistics
+  - Třídy: LogisticsJobSystem : MonoBehaviour, LogisticsJob, ILogisticsWorker
+  - Popis: Asynchronní logistický systém přepravních zakázek. Řídí nosiče, transportní drony a nákladní vozy při přepravě surovin s prioritami a rezervacemi.
+
+• MarkovNameAndLoreGenerator.cs
+  - Namespace: (Global)
+  - Třídy: MarkovNameAndLoreGenerator, MarkovModel
+  - Popis: Generátor procedurálních jmen, názvů frakcí a textového lore pomocí N-gramových Markovových řetězců s vestavěnými slovníky (Fantasy, Sci-Fi, Severské).
+
+• ObjectPoolManager.cs
+  - Namespace: (Global)
+  - Třídy: ObjectPoolManager : MonoBehaviour, Pool
+  - Popis: Generický pooling herních objektů a komponent s nulovou alokací na GC pro projektily, částicové efekty a zvukové přehrávače.
+
+• SaveLoadSerializer.cs
+  - Namespace: GameSystems.Persistence
+  - Třídy: SaveLoadSerializer : MonoBehaviour, ISaveableSystem, SaveMetadata
+  - Popis: Univerzální ukládací a načítací systém. Snímá stavy všech komponent implementujících ISaveableSystem do atomického JSON/binárního souboru s kontrolním součtem SHA-256.
+
+• TimeRewindSystem.cs
+  - Namespace: (Global)
+  - Třídy: TimeRewindSystem : MonoBehaviour, PointInTime
+  - Popis: Systém přetáčení času ve stylu hry Braid. Ukládá pozice, rotace a stavy do kruhového bufferu a umožňuje plynulý zpětný chod času.
+
+• UniversalInventoryContainer.cs
+  - Namespace: GameSystems.Inventory
+  - Třídy: UniversalInventoryContainer : MonoBehaviour, InventoryItem, StatBonus
+  - Popis: Univerzální inventář a sklad. Podporuje stohování předmětů, nosnost/váhu, stupně vzácnosti, bonusy ke statistikám, integraci událostí a ukládání.
+
+• VisualInspectorAttributes.cs
+  - Namespace: VisualInspectorStudio
+  - Třídy: ButtonAttribute, ShowIfAttribute, HideIfAttribute, ReadOnlyInspectorAttribute, ProgressBarAttribute, MinMaxSliderAttribute, BoxGroupAttribute, TabGroupAttribute, RequiredFieldAttribute, TelemetryGraphAttribute
+  - Popis: Sada vlastních atributů pro tvorbu moderního uživatelského rozhraní v inspektoru Unity (inspirováno balíčkem Odin Inspector) bez závislostí třetích stran.
+
+• ZeroGCEventBus.cs
+  - Namespace: GameSystems.Events
+  - Třídy: ZeroGCEventBus, EventBus<T>, IGameEvent, EventCallback<T>
+  - Popis: Ultrarychlá generická statická sběrnice událostí s nulovou alokací paměti. Předává parametry přes 'in struct', podporuje bezpečné přihlášení a automatický reset v Play módu.
+
+
+--------------------------------------------------------------------------------
+12. SLOŽKA: /AudioAndVFX/ (Vizuální efekty, mlha války, syntéza zvuku a rytmika)
+--------------------------------------------------------------------------------
+• FogOfWarManager.cs
+  - Namespace: GameSystems.Vision
+  - Třídy: FogOfWarManager : MonoBehaviour
+  - Popis: Dynamická mlha války (Fog of War) s pamětí prozkoumaných oblastí. Využívá 2D raycasting zorného pole a dynamickou texturu promítanou na herní scénu.
+
+• ProceduralAudioSynthesizer.cs
+  - Namespace: (Global)
+  - Třídy: ProceduralAudioSynthesizer : MonoBehaviour, SynthVoice, ADSREnvelope
+  - Popis: Procedurální DSP zvukový syntezátor běžící v reálném čase. Obsahuje oscilátory (Sinus, Čtverec, Pila, Bílý šum), ADSR obálky, filtry a generátor laserů i explozí.
+
+• RhythmConductor.cs
+  - Namespace: (Global)
+  - Třídy: RhythmConductor : MonoBehaviour, Judgement
+  - Popis: Rytmický dirigent synchronizovaný s AudioSettings.dspTime. Počítá beaty, taktové míry a vyhodnocuje přesnost stisku (Perfect, Good, OK, Miss).
+
+• SpeechToTextManager.cs
+  - Namespace: GameSystems.Speech
+  - Třídy: SpeechToTextManager : MonoBehaviour, ISpeechToTextProvider
+  - Popis: Záznam mikrofonu s Voice Activity Detection (VAD), WAV enkódováním v paměti a lokálním parserem hlasových povelů pro hlasové ovládání herních akcí.
+
+• SpriteFlasher.cs
+  - Namespace: (Global)
+  - Třídy: SpriteFlasher : MonoBehaviour
+  - Popis: Krátký barevný záblesk spritu (Damage Flash) při zásahu zbraní s využitím instancovaných materiálových vlastností bez duplikování materiálů.
+
+• VisualEffectManager.cs
+  - Namespace: (Global)
+  - Třídy: VisualEffectManager : MonoBehaviour
+  - Popis: Centrální správce vizuálních efektů: poolované částicové systémy, otisky střel (decals), otřesy obrazovky (screen shake) a plovoucí čísla poškození (damage numbers).
+
+
+--------------------------------------------------------------------------------
+13. SLOŽKA: /Assets/Editor/ (UI Toolkit nástroje: EditorProWorkspace & VisualInspectorStudio)
+--------------------------------------------------------------------------------
+• EditorProAssetDatabaseCache.cs
+  - Namespace: EditorProWorkspace
+  - Třídy: EditorProAssetDatabaseCache, ScriptableObjectTypeInfo
+  - Popis: Automatické vyhledávání typů pomocí TypeCache, indexování aktiv na disku, vyhledávací engine (t:Type, -path:, fuzzy) a AssetPostprocessor pro auto-refresh.
+
+• EditorProDataAndSettings.cs
+  - Namespace: EditorProWorkspace
+  - Třídy: EditorProCategoryAttribute, IEditorProBadgeProvider
+  - Popis: Datové struktury, ScriptableSingleton perzistence v ProjectSettings/EditorProSettings.json, kategorie, oblíbené položky, štítky a konfigurace workspace.
+
+• EditorProWindow.cs
+  - Namespace: EditorProWorkspace
+  - Třídy: EditorProWindow : EditorWindow
+  - Popis: Třípanelové responsivní okno Unity 6 UI Toolkit s TwoPaneSplitView, mřížkovým (Dense Grid) a tabulkovým zobrazením, záložkami inspektoru a tvorbou aktiv.
+
+• VisualInspectorEditor.cs
+  - Namespace: VisualInspectorStudio.Editor
+  - Třídy: VisualInspectorMonoBehaviourEditor, VisualInspectorScriptableObjectEditor, VisualInspectorEditorBase
+  - Popis: UI Toolkit univerzální vlastní inspektor (isFallback = true) pro MonoBehaviour a ScriptableObject. Vykresluje skupiny BoxGroup/TabGroup, podmínky ShowIf/HideIf, tlačítka metod a telemetrické grafy.
+
+
+--------------------------------------------------------------------------------
+14. SLOŽKA: /PiperTTS/ (Lokální offline neurální syntéza řeči Piper (Text-to-Speech))
+--------------------------------------------------------------------------------
+• ESpeakNative.cs
+  - Namespace: Piper
+  - Třídy: ESpeakNative
+  - Popis: Nativní P/Invoke rozhraní pro vestavěnou knihovnu eSpeak-ng sloužící k fonetickému přepisu textových řetězců do fonémů.
+
+• PiperDemoSceneBuilder.cs
+  - Namespace: Piper.EditorTools
+  - Třídy: PiperDemoSceneBuilder
+  - Popis: Editorový nástroj pro automatické vygenerování a nastavení demonstrační testovací scény pro syntézu hlasu.
+
+• PiperDemoUI.cs
+  - Namespace: Piper
+  - Třídy: PiperDemoUI : MonoBehaviour
+  - Popis: Uživatelské rozhraní pro testování syntézy řeči v reálném čase, výběr hlasových modelů a nastavování parametrů tempa.
+
+• PiperTTS.cs
+  - Namespace: Piper
+  - Třídy: PiperTTS : MonoBehaviour
+  - Popis: Hlavní řídicí komponenta neurální syntézy řeči. Využívá ONNX runtime pro převod fonémů na audio vzorky s přehráváním přes AudioSource.
+
+• PiperVoiceConfig.cs
+  - Namespace: Piper
+  - Třídy: PiperVoiceConfig
+  - Popis: Konfigurační model hlasu, načítání metadat z JSON profilů hlasových modelů a mapování fonémových tabulek.
+
+• PiperVoiceDownloader.cs
+  - Namespace: Piper.EditorTools
+  - Třídy: PiperVoiceDownloader : EditorWindow
+  - Popis: Editorové okno pro stahování a instalaci oficiálních vícejazyčných ONNX modelů Piper z repozitářů HuggingFace.
+
+• VoiceLines.cs
+  - Namespace: Piper
+  - Třídy: VoiceLines : MonoBehaviour
+  - Popis: Správce předpřipravených dialogových replik a fronty přehrávání hlasů postav s podporou lokalizace.
+
+
+--------------------------------------------------------------------------------
+15. SLOŽKA: /PixelLight2D/ (2D pixel-artové dynamické osvětlení)
+--------------------------------------------------------------------------------
+• BreathLight2D.cs
+  - Namespace: (Global)
+  - Třídy: BreathLight2D : MonoBehaviour
+  - Popis: Plynulá sinusová pulzace a animace dýchání 2D bodových a plošných světel pro magické krystaly, lucerny a pochodně.
+
+• PixelLightAnimator.cs
+  - Namespace: (Global)
+  - Třídy: PixelLightAnimator : MonoBehaviour
+  - Popis: Dynamický animátor pixel-artových světel. Řídí flicker efekty, změny barevných palet a vrhání stínů na 2D normálové mapy.
+
+================================================================================
+Konec katalogu. Všechny skripty jsou plně zkompilovány a připraveny k použití.
+================================================================================

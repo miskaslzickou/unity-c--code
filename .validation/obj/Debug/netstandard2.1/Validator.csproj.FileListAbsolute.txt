@@ -1,0 +1,11 @@
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\bin\Debug\netstandard2.1\Validator.deps.json
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\bin\Debug\netstandard2.1\Validator.dll
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\bin\Debug\netstandard2.1\Validator.pdb
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\obj\Debug\netstandard2.1\Validator.csproj.AssemblyReference.cache
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\obj\Debug\netstandard2.1\Validator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\obj\Debug\netstandard2.1\Validator.AssemblyInfoInputs.cache
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\obj\Debug\netstandard2.1\Validator.AssemblyInfo.cs
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\obj\Debug\netstandard2.1\Validator.csproj.CoreCompileInputs.cache
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\obj\Debug\netstandard2.1\Validator.sourcelink.json
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\obj\Debug\netstandard2.1\Validator.dll
+C:\Users\ilike\Documents\GitHub\unity c# code\.validation\obj\Debug\netstandard2.1\Validator.pdb

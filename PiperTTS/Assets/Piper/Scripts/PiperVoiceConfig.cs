@@ -1,3 +1,4 @@
+#if UNITY_INFERENCE_ENGINE && NEWTONSOFT_JSON
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -83,3 +84,5 @@ namespace Piper
 #pragma warning restore 0649
     }
 }
+
+#endif
